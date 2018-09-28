@@ -1,28 +1,22 @@
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-/**
- * Write a description of class Task here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class Task
-{
-    public static List<Task> Tasks = new ArrayList<>();
+public class Task  {
+	public static List<Task> Tasks = new ArrayList<>();
 
 	  private String title;
 	  private String status;
 	  private String dateTask;
 	  private String project;
-	  private String[] todo;
-	  private int count;     //how many tasks have been added to todo
-      private int edit;
+	  private static String[] todo;
+	  private static int count;     //how many tasks have been added to todo
+      private static int edit;
 
 	   // This is the constructor of the class Task
-	    public Task(String title,String status , String project ) {
+	    public Task(String title,String status , String project, int count, int edit, String[] todo) {
 			this.title=title;
 			this.status=status;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
@@ -103,7 +97,7 @@ public class Task
 				
 				String project = scanner.nextLine();
 				
-			       Tasks.add(new Task(title,status,project));
+			       boolean add = Tasks.add(new Task(title,status,project,count,edit, todo));
 				
 				
 				

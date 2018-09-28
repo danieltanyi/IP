@@ -1,13 +1,8 @@
 
-/**
- * Write a description of class MainClass here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class MainClass
-{
-    public static void main(String[] args) {
+
+public class MainClass {
+	
+	public static void main(String[] args) {
 
 	    java.util.Scanner keybd = new java.util.Scanner(System.in);
 	    

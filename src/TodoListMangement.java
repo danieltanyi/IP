@@ -1,13 +1,9 @@
+
 import java.util.Scanner;
-/**
- * Write a description of class TodoListMangement here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class TodoListMangement
-{
-    public static void editTasks() {
+
+public class TodoListMangement {
+	
+	public static void editTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 	    
 
@@ -27,11 +23,7 @@ public class TodoListMangement
 		        switch (choice) {
 		          case 1:  
 		            System.out.print("You choose to update a task\n ");
-		            //take input from user on which task to edit
 		            
-		            //print task
-		            
-		            //get the task in the list and update it
 		            
 		            break;
 
