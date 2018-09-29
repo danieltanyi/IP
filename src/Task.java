@@ -1,9 +1,20 @@
-//changes
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
+
+/**
+ * Write a description of class Task here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+
+
 public class Task  {
 	public static List<Task> Tasks = new ArrayList<>();
 
@@ -11,20 +22,15 @@ public class Task  {
 	  private String status;
 	  private String dateTask;
 	  private String project;
-	  private static String[] todo;
-	  private static int count;     //how many tasks have been added to todo
-      private static int edit;
-
+	  
 	   // This is the constructor of the class Task
-	    public Task(String title,String status , String project, int count, int edit, String[] todo) {
+	    public Task(String title,String status , String project) {
 			this.title=title;
 			this.status=status;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 			this.dateTask=sdf.format(new Date()); 
 			this.project=project;
-			this.todo = new String[5];
-			this.count=count;
-			this.edit=edit;
+			
 			
 		}
 	   public String getTitleTask() {
@@ -39,21 +45,20 @@ public class Task  {
 	   public String getDateTask() {
 		   return this.dateTask;
 	   }
-	   public int getSize() {
-		    return count;
-		  }
-	   public String toString() {
-			  
-			
-		    String output = ">> Welcome to ToDoly:\n";
-		    
-		    
-		    for (int i = 0; i < this.count; i++) {
-		      output += (i + 1) + ". " + this.todo[i] + "\n";
-		    }
-		    return output;
-		    
-		  }
+	   
+	   public void setStatusTask(String statusupdate) { 
+		   status = statusupdate; 
+		}
+	   public void setTitleTask(String titleupdate) { 
+		   title = titleupdate; 
+		}
+	   public void setProjectTask(String projectupdate) { 
+		   project = projectupdate; 
+		}
+	   public void setDateTask(String dateupdate) { 
+		   dateTask = dateupdate; 
+		}
+	   
 	   
 
 	   // Assign the status of the task  to the variable status.
@@ -63,7 +68,7 @@ public class Task  {
 
 	   /* Assign the date to the variable dateTask.*/
 	   public void TaskDate() {
-		   SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		    dateTask = sdf.format(new Date()); 
 	      
 	   }
@@ -97,7 +102,7 @@ public class Task  {
 				
 				String project = scanner.nextLine();
 				
-			       boolean add = Tasks.add(new Task(title,status,project,count,edit, todo));
+			       boolean add = Tasks.add(new Task(title,status,project));
 				
 				
 				
@@ -129,52 +134,45 @@ public class Task  {
 			
 		   
 	   }
-	   
-	 /**  public static void Removal() {
+	   public static  void Removal() {
 
 		    
 	       Scanner in = new Scanner(System.in);
-	       System.out.println("Enter Element to be deleted : ");
+	       System.out.println("Enter the index Element to be deleted : ");
 	       
 	      
 	       int elem = in.nextInt();
 	       
 	       
-	       for(int i1 = 0; i1 < Tasks.size(); i1++){
-	           
-				if(Tasks.indexOf(i1) == elem){
-	               // shifting elements
-	               for(int j = i1; j < Tasks.size() - 1; j++){
-	                   Tasks.indexOf(i1) = Tasks.
-	               }
-	               break;
+	       
+	                   Tasks.remove(elem);
+	               
 	           }
-	       }
+	  public static  void MarkAsDone() {
+
+		    
+	      Scanner in = new Scanner(System.in);
+	      System.out.println("Enter the index Element to be Masked as done : ");
+	      
 	     
-	       System.out.println("Elements -- " );
-	       for(int i = 0; i < Tasks.size() ;i++){
-	           System.out.print(" " + Tasks[i1]);
-	       }                
+	      int elem = in.nextInt();
+	      
+	      
+	      
+	                  Tasks.get(elem).setStatusTask("done");
+	              
+	          }
+	  public static void testprinting() {
+			Collections.sort(Tasks, Comparator.comparing(Task ::getProjectTask));
+	      System.out.println("Sorted tasks List by project : " +Tasks);
+		}
+	       
+	     
+	                    
 	   }
-	   **/
 	   
-	   public String remove(int index) {
-		    if (index < 1 || index > this.count) {
-		      return null;  //no such element
-		    }else {
-		      index--;  //convert to 0-based indexing used by array
-		      String deleted = this.todo[index];
-		      //delete by shifting everything down into removed item's space
-		      for (int i = index; i < this.count - 1; i++) {
-		        this.todo[i] = this.todo[i + 1];
-		      }
-		      this.count--;  //removed an element
-		      return deleted;
-		    }
-		  }
-
 	   
-	}
-
-
-
+	   
+	
+	   
+	   

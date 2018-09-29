@@ -1,4 +1,10 @@
-
+import java.util.Scanner;
+/**
+ * Write a description of class MainClass here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
 // change in the main to test git
 public class MainClass {
 	
@@ -8,7 +14,8 @@ public class MainClass {
 	    
 
 	    int choice = 1;
-	    while (choice != 4) {
+	    while (choice != 4)
+	    {
 	      
 	      System.out.println();
 	      
@@ -34,6 +41,7 @@ public class MainClass {
 	            System.out.print("You choose to show all the tasks\n ");
 	            
 	            Task.printAllTasks();
+	            Task.testprinting();
 	            break;
 
 	          case 2:  
