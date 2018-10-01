@@ -5,8 +5,13 @@ import java.util.Scanner;
  * @author (your name)
  * @version (a version number or a date)
  */
-// change in the main to test git
+
 public class MainClass {
+	/**
+	   * Provides a simple menu-based interface for the user to use a single
+	   * Task.
+	   */
+
 	
 	public static void main(String[] args) {
 
@@ -59,7 +64,9 @@ public class MainClass {
 
 	          case 4:
 	        	System.out.println(" You choose to Save and Quit ");
-	            System.out.println("Goodbye!");
+	            System.out.println("Thank you for everything.Goodbye!");
+	            
+	            
 	            break;
 
 	          default:

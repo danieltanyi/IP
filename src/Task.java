@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
+import java.io.FileWriter;
 
 /**
  * Write a description of class Task here.
@@ -17,34 +18,64 @@ import java.util.Comparator;
 
 public class Task  {
 	public static List<Task> Tasks = new ArrayList<>();
+	
 
 	  private String title;
 	  private String status;
 	  private String dateTask;
 	  private String project;
+	  private static FileWriter myFileWriter;
 	  
-	   // This is the constructor of the class Task
-	    public Task(String title,String status , String project) {
-			this.title=title;
+	   
+	  /**
+	     * Creates a task with a title, status and a dateTask which can be assigned to the user project. 
+	     * @param title 
+	     * @param status 
+	     * @param dateTask
+	     * @param project
+	     */ 
+	    public Task(String title,String status , String project, FileWriter myFileWriter) {
+			//new FileWriter("src/tasks", true)
+	    	
+	    	this.title=title;
 			this.status=status;
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			this.dateTask=sdf.format(new Date()); 
 			this.project=project;
-			
+			Task.setMyFileWriter(myFileWriter);
 			
 		}
+	    /**
+	     * Getter for the title of the Task 
+	     * @return the title 
+	     */
 	   public String getTitleTask() {
 	       return title;
 	   }
+	   /**
+	     * Getter for the status of the Task 
+	     * @return the status 
+	     */ 
 	   public String getStatusTask() {
 	       return status;
 	   }
+	   /**
+	     * Getter for the project of the Task 
+	     * @return the project 
+	     */ 
 	   public String getProjectTask() {
 	       return project;
 	   }
 	   public String getDateTask() {
 		   return this.dateTask;
 	   }
+	   public FileWriter getFileWriterTask() {
+		   return Task.getMyFileWriter();
+	   }
+	   /**
+	     * sets the count of new local tasks 
+	     */ 
+	   
 	   
 	   public void setStatusTask(String statusupdate) { 
 		   status = statusupdate; 
@@ -58,6 +89,8 @@ public class Task  {
 	   public void setDateTask(String dateupdate) { 
 		   dateTask = dateupdate; 
 		}
+	   public void setFileWriterTask(FileWriter myFileWriter) {
+	   }
 	   
 	   
 
@@ -102,7 +135,7 @@ public class Task  {
 				
 				String project = scanner.nextLine();
 				
-			       boolean add = Tasks.add(new Task(title,status,project));
+			       Tasks.add(new Task(title,status,project,getMyFileWriter()));
 				
 				
 				
@@ -134,6 +167,8 @@ public class Task  {
 			
 		   
 	   }
+	   
+	  
 	   public static  void Removal() {
 
 		    
@@ -166,6 +201,12 @@ public class Task  {
 			Collections.sort(Tasks, Comparator.comparing(Task ::getProjectTask));
 	      System.out.println("Sorted tasks List by project : " +Tasks);
 		}
+	public static FileWriter getMyFileWriter() {
+		return myFileWriter;
+	}
+	public static void setMyFileWriter(FileWriter myFileWriter) {
+		Task.myFileWriter = myFileWriter;
+	}
 	       
 	     
 	                    
