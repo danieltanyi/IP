@@ -64,6 +64,7 @@ public class Task implements Serializable {
 	       {
 	           return dateTask;
 	       }
+	  
 	  public void setStatusTask(String statusupdate)
 	      {
 	           status = statusupdate;

@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class TaskManagement {
 	
 	public static  List<Task> Tasks = new ArrayList<>();
-    public static void MenuDisplay() 
+    public static void DisplayMenu() 
     {
         Scanner keybd = new java.util.Scanner(System.in);
         int choice = 1;
@@ -88,7 +88,7 @@ public class TaskManagement {
             Date datetask = td.parse(dateTask);
             Tasks.add(new Task(title,status,datetask,project));
             try{
-                 FileOutputStream fos= new FileOutputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/test.txt");
+                 FileOutputStream fos= new FileOutputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
                  ObjectOutputStream oos= new ObjectOutputStream(fos);
                  for(Task task: Tasks) 
                  {
