@@ -1,3 +1,4 @@
+package com.daniel.ip.model;
 import java.util.Date;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,14 +11,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 /**
- * Write a description of class TaskManagement here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ *  This is the "Task Management" class of the "Todo List" application. 
+ *  This application will allow a user to create a new tasks, assign them a title and due date , 
+ *  and choose a project for that task to belong to. The will need to use a text based user interface via 
+ *  the command-line. Once they are using the application, the user should be able to also edit , mark as done or
+ *  remove tasks.They can also quit and save the current task list to the file, and then restart the application with 
+ *  the former state restored.
+ * 
+ *  To run this application, you have to create an instance of a class "Task" with method 
+ *  that get and return the title,status, date and project.
+ * 
+ *  This Task management class uses the Scanner method to obtained input and add Tasks to the list
+ *  and can also edit Task.
+ * 
+ * @author  Daniel T
+ * 
  */
 public class TaskManagement {
 	
-	public static  List<Task> Tasks = new ArrayList<>();
+	/**
+     * Returns a List with all local Tasks 
+     * @return List with all local Tasks 
+     */ 
+	
+	public static final List<Task> Tasks = new ArrayList<>();
     public static void DisplayMenu() 
     {
         Scanner keybd = new java.util.Scanner(System.in);
@@ -40,7 +57,7 @@ public class TaskManagement {
             keybd.nextLine();  //clear input stream
             switch (choice) {
               case 1:  
-                System.out.print("You choose to show all the tasks\n ");
+                System.out.print("You choose to show all the tasks\n");
                 printAllTasks();
                 break;
               case 2:  
@@ -65,11 +82,17 @@ public class TaskManagement {
             System.out.println("Sorry, but you must enter a number.");
             keybd.nextLine();  //clear bad input from stream
           } catch (ParseException e) {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
         }
         }//end while
       }//end main
+    
+    /**
+     * using scanner to obtained input to Adds a user to a task 
+     * @param user 
+     */ 
+    
     
     public static void addTask() throws ParseException 
     {
@@ -79,14 +102,15 @@ public class TaskManagement {
             String title = scanner.nextLine();
             System.out.println("Please Enter the Status of the Task:");
             String status = scanner.nextLine();
-            System.out.println("Please Enter the Date of the Task:");
+            System.out.println("Please Enter the Date of the Task with format (yyyy-MM-dd):");
             String dateTask = scanner.nextLine();
             System.out.println("Please Enter the Project of the Task:");
             String project = scanner.nextLine();
             
+            
             SimpleDateFormat td = new SimpleDateFormat("yyyy-MM-dd");
             Date datetask = td.parse(dateTask);
-            Tasks.add(new Task(title,status,datetask,project));
+            Tasks.add(new Task(title,dateTask,status,project));
             try{
                  FileOutputStream fos= new FileOutputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
                  ObjectOutputStream oos= new ObjectOutputStream(fos);
@@ -98,7 +122,7 @@ public class TaskManagement {
                  oos.close();
                  fos.close();
                  
-                 FileInputStream fis = new FileInputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/test.txt");
+                 FileInputStream fis = new FileInputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
                  ObjectInputStream ios= new ObjectInputStream(fis);
 
                  
@@ -111,19 +135,22 @@ public class TaskManagement {
             
             System.out.println("Task Created");
     }
+    
+    /* Print the Task details  using the align format*/
+    
     public static  void printAllTasks()
     {
-           System.out.println("------------------------------------------------------------------");
-           Tasks.forEach(task -> {
-               System.out.println("Title of the task: "+task.getTitleTask() );
-                  System.out.println("Status of the task: " +task.getStatusTask() );
-                  System.out.println("Date of the Task: " +task.getDateTask() );
-                  System.out.println("This task belong to this Project: " + task.getProjectTask());
-                  System.out.println("Index of the task :" +Tasks.indexOf(task) );
-                  System.out.println("");
-               
-           });
-           System.out.println("------------------------------------------------------------------");
+    	
+    	
+           String AlignFormat = "| %-11d | %-16s |%-18s |%-21s |%-16s |%n";
+           System.out.format("+-------------+------------------+-------------------+----------------------+-----------------+%n");
+           System.out.format("| Task Index  |     Tiltle       |        Status     |       Date           |      Project    |%n");
+           System.out.format("+-------------+------------------+-------------------+----------------------+-----------------+%n");
+           Tasks.forEach(task1 -> {
+           System.out.format(AlignFormat,Tasks.indexOf(task1), task1.gettitle(), task1.getstatuse(), task1.getdate(), task1.getproject());
+           }); 
+               System.out.format("+-------------+------------------+-------------------+----------------------+-----------------+%n");
+       
        }
     public static void editTasks()  {
         java.util.Scanner keybd = new java.util.Scanner(System.in);
@@ -176,6 +203,9 @@ public class TaskManagement {
         int elem = in.nextInt();
         Tasks.remove(elem);
         }
+    /**
+     * Marks a task as done 
+     */ 
                    
                
       public static  void MarkAsDone() 
@@ -183,7 +213,8 @@ public class TaskManagement {
           Scanner in = new Scanner(System.in);
           System.out.println("Enter the index Element to be Masked as done : ");
           int elem = in.nextInt();
-          Tasks.get(elem).setStatusTask("done");
+          if (elem >= 0 && elem < Tasks.size())
+        	  Tasks.get(elem).setStatusTask("done");
           }
       public static void UpdateTasks()  {
             java.util.Scanner keybd = new java.util.Scanner(System.in);
@@ -247,7 +278,10 @@ public class TaskManagement {
                   }catch (java.util.InputMismatchException ime) {
                     System.out.println("Sorry, but you must enter a number.");
                     keybd.nextLine();  //clear bad input from stream
-                  }}
+                
+                }
+                }
+            
         }
     
     
@@ -255,5 +289,8 @@ public class TaskManagement {
        
     
 }
+
+
+	
 
 
