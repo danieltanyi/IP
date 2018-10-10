@@ -1,4 +1,4 @@
-package com.daniel.ip.test;
+package com.daniel.ip.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,15 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.assertEquals;
-import com.daniel.ip.model.TaskManagement;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 
-
-class IpUnitTest {
+class TaskManagementTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,12 +27,17 @@ class IpUnitTest {
 	}
 
 	@Test
-	void test() {
-		TaskManagement tm= new TaskManagement();
-		System.out.println(tm.toString());
-		assertEquals("com.daniel.ip.model.TaskManagement@2d1ef81a",tm.toString());
-	
+	void addTask() {
+		TaskManagement taskMana1 = new TaskManagement();
+        assertEquals(false, taskMana1.equals("Scanner"));
 	}
-	
+	@Test
+    public void markAsDone()
+    {
+        TaskManagement taskMana1 = new TaskManagement();
+        TaskManagement taskMana2 = new TaskManagement();
+        TaskManagement.MarkAsDone();
+        
 
+}
 }
