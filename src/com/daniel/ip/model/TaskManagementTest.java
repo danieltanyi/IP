@@ -35,7 +35,7 @@ class TaskManagementTest {
     public void markAsDone()
     {
         TaskManagement taskMana1 = new TaskManagement();
-        TaskManagement taskMana2 = new TaskManagement();
+        //TaskManagement taskMana2 = new TaskManagement();
         TaskManagement.MarkAsDone();
         
 
