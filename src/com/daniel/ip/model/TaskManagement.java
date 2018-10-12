@@ -34,10 +34,20 @@ public class TaskManagement {
      * @return List with all local Tasks 
      */ 
 	
-	public static final List<Task> Tasks = new ArrayList<>();
+	public static List<Task> Tasks = new ArrayList<>();
+	private static Date datetask;
+	private static Scanner scanner;
+	
+	public TaskManagement() 
+	{
+		FileManager fM = new FileManager();
+		Tasks = fM.readTaskList();
+		scanner = new Scanner(System.in);
+		//TODO Tasks = readFromFile();
+	}
+	
     public static void DisplayMenu() 
     {
-        Scanner keybd = new java.util.Scanner(System.in);
         int choice = 1;
         while (choice != 4) {
         System.out.println();
@@ -53,8 +63,8 @@ public class TaskManagement {
         System.out.println("*************************************************************************");
           //process user's menu choice
           try {
-            choice = keybd.nextInt();
-            keybd.nextLine();  //clear input stream
+            choice = scanner.nextInt();
+            scanner.nextLine();  //clear input stream
             switch (choice) {
               case 1:  
                 System.out.print("You choose to show all the tasks\n");
@@ -71,6 +81,7 @@ public class TaskManagement {
                 
               case 4:
                 System.out.println(" You choose to Save and Quit ");
+                saveTaskList(Tasks);
                 System.out.println("Goodbye!");
                 break;
               default:
@@ -80,7 +91,7 @@ public class TaskManagement {
             }
           }catch (java.util.InputMismatchException ime) {
             System.out.println("Sorry, but you must enter a number.");
-            keybd.nextLine();  //clear bad input from stream
+            scanner.nextLine();  //clear bad input from stream
           } catch (ParseException e) {
            
             e.printStackTrace();
@@ -88,7 +99,28 @@ public class TaskManagement {
         }//end while
       }//end main
     
-    /**
+    private static void saveTaskList(List<Task> taskList) {
+    	try{
+            FileOutputStream fos= new FileOutputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
+            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            for(Task task: taskList) 
+            {
+           	 oos.writeObject(task.toString());
+            }
+            //oos.writeObject(Tasks);
+            oos.close();
+            fos.close();
+            
+           
+            
+          }catch(IOException ioe){
+               ioe.printStackTrace();
+           }
+       
+		
+	}
+
+	/**
      * using scanner to obtained input to Adds a user to a task 
      * @param user 
      */ 
@@ -96,7 +128,6 @@ public class TaskManagement {
     
     public static void addTask() throws ParseException 
     {
-        Scanner scanner = new java.util.Scanner(System.in);
             System.out.println("adding a new task");
             System.out.println("Please Enter the Title of the Task:");
             String title = scanner.nextLine();
@@ -109,29 +140,9 @@ public class TaskManagement {
             
             
             SimpleDateFormat td = new SimpleDateFormat("yyyy-MM-dd");
-            Date datetask = td.parse(dateTask);
+            setDatetask(td.parse(dateTask));
             Tasks.add(new Task(title,dateTask,status,project));
-            try{
-                 FileOutputStream fos= new FileOutputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
-                 ObjectOutputStream oos= new ObjectOutputStream(fos);
-                 for(Task task: Tasks) 
-                 {
-                	 oos.writeObject(task.toString());
-                 }
-                 //oos.writeObject(Tasks);
-                 oos.close();
-                 fos.close();
-                 
-                 FileInputStream fis = new FileInputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
-                 ObjectInputStream ios= new ObjectInputStream(fis);
-
-                 
-                 fis.close();
-                 
-                 
-               }catch(IOException ioe){
-                    ioe.printStackTrace();
-                }
+            
             
             System.out.println("Task Created");
     }
@@ -153,7 +164,6 @@ public class TaskManagement {
        
        }
     public static void editTasks()  {
-        java.util.Scanner keybd = new java.util.Scanner(System.in);
         
         int choice = 1;
         while (choice != 4) {
@@ -166,8 +176,8 @@ public class TaskManagement {
             System.out.println(">> (4) Exit   ");
             
             try {
-                choice = keybd.nextInt();
-                keybd.nextLine();  //clear input stream
+                choice = scanner.nextInt();
+                scanner.nextLine();  //clear input stream
                 switch (choice) {
                   case 1:  
                     System.out.print("You choose to update a task\n ");
@@ -192,15 +202,14 @@ public class TaskManagement {
                 }
               }catch (java.util.InputMismatchException ime) {
                 System.out.println("Sorry, but you must enter a number.");
-                keybd.nextLine();  //clear bad input from stream
+                scanner.nextLine();  //clear bad input from stream
               
             }
         }}
     public static  void Removal()
     {
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter the index Element to be deleted : ");
-        int elem = in.nextInt();
+        int elem = scanner.nextInt();
         Tasks.remove(elem);
         }
     /**
@@ -210,14 +219,14 @@ public class TaskManagement {
                
       public static  void MarkAsDone() 
       {
-          Scanner in = new Scanner(System.in);
+          scanner = new Scanner(System.in);
           System.out.println("Enter the index Element to be Masked as done : ");
-          int elem = in.nextInt();
+          int elem = scanner.nextInt();
           if (elem >= 0 && elem < Tasks.size())
         	  Tasks.get(elem).setStatusTask("done");
           }
       public static void UpdateTasks()  {
-            java.util.Scanner keybd = new java.util.Scanner(System.in);
+            scanner = new java.util.Scanner(System.in);
             int choice = 1;
             while (choice != 4) {
             System.out.println(">> Pick an option for updating a task:  ");
@@ -227,8 +236,8 @@ public class TaskManagement {
             System.out.println(">> (4) Exit   ");
                 
                 try {
-                    choice = keybd.nextInt();
-                    keybd.nextLine();  //clear input stream
+                    choice = scanner.nextInt();
+                    scanner.nextLine();  //clear input stream
                     switch (choice) {
                       case 1:  
                         System.out.print("You choose to update the title of the task\n ");
@@ -277,20 +286,25 @@ public class TaskManagement {
                     }
                   }catch (java.util.InputMismatchException ime) {
                     System.out.println("Sorry, but you must enter a number.");
-                    keybd.nextLine();  //clear bad input from stream
+                    scanner.nextLine();  //clear bad input from stream
                 
                 }
                 }
             
         }
-    
+
+	public static Date getDatetask() {
+		return datetask;
+	}
+
+	public static void setDatetask(Date datetask) {
+		TaskManagement.datetask = datetask;
+	}
+
+
     
            
        
     
 }
-
-
-	
-
 

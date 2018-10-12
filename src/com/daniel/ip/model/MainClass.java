@@ -5,7 +5,8 @@ public class MainClass {
 
 	public static void main(String[] args)
     {
-        TaskManagement.DisplayMenu() ;
+		TaskManagement tm = new TaskManagement();
+        tm.DisplayMenu() ;
         
     }
 	}
@@ -23,6 +24,7 @@ public class MainClass {
                  
           
         
+     
     
     
 
