@@ -40,10 +40,13 @@ public class TaskManagement {
 	
 	public TaskManagement() 
 	{
+		
+		// Reading Tasks from file
+		
 		FileManager fM = new FileManager();
 		Tasks = fM.readTaskList();
 		scanner = new Scanner(System.in);
-		//TODO Tasks = readFromFile();
+	
 	}
 	
     public static void DisplayMenu() 
