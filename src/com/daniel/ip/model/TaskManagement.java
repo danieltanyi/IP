@@ -35,6 +35,8 @@ public class TaskManagement {
      */ 
 	
 	public static List<Task> Tasks = new ArrayList<>();
+
+	
 	private static Date datetask;
 	private static Scanner scanner;
 	
@@ -50,6 +52,7 @@ public class TaskManagement {
 	}
 	
     public static void DisplayMenu() 
+    
     {
         int choice = 1;
         while (choice != 4) {

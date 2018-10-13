@@ -38,6 +38,7 @@ public class FileManager
 	public List<Task> readTaskList() 
 	{
 		List<Task> list = new ArrayList<>();
+		
 		try {
 			FileInputStream fis = new FileInputStream("/Users/tmp-sda-1160/eclipse-workspace/IP/src/test.txt");
 			ObjectInputStream ios = new ObjectInputStream(fis);
