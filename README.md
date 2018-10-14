@@ -34,5 +34,9 @@ The **goal** is to be able to :
 ![](https://user-images.githubusercontent.com/25740696/46872546-b3810b00-ce34-11e8-9df1-719f9ff538b8.png)
 ### Edited Task (Update index 4 with new title:Gym, update new date index 7 to 2012-09-15, update index 1 with new project :Book and lastly remove task with index 6
 ![](https://user-images.githubusercontent.com/25740696/46872724-3c984200-ce35-11e8-96d7-9b9b14da008b.png)
+### Unit Testing for Task Class
+![](https://user-images.githubusercontent.com/25740696/46914653-a54ffd80-cfa0-11e8-80ed-85a56472f875.png)
+### Unit Testing for TaskManagement Class
+![](https://user-images.githubusercontent.com/25740696/46914714-55be0180-cfa1-11e8-946b-0498dc1d1857.png)
 
  
